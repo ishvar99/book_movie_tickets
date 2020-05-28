@@ -26,10 +26,12 @@ body{
 .showcase{
     background-color: rgba(0, 0, 0, 0.1);
     padding: 5px 10px;
+    color: #777;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 .showcase div{
     display: flex;
@@ -83,4 +85,8 @@ body{
 .showcase .seat.seat:not(.occupied):hover{
     cursor: default;
     transform: scale(1);
+}
+
+p.text span{
+    color: #6feaf6;
 }
