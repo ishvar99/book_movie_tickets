@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Seat Booking</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -17,20 +18,20 @@
             <option value="9">Contagion</option>
         </select>
     </div>
-    <ul class="showcase">
-        <li>
+    <div class="showcase">
+        <div>
             <div class="seat"></div>
             <small>N/A</small>
-        </li>
-        <li>
+        </div>
+        <div>
             <div class="seat selected"></div>
             <small>Selected</small>
-        </li>
-        <li>
+        </div>
+        <div>
             <div class="seat occupied"></div>
             <small>Occupied</small>
-        </li>
-    </ul>
+        </div>
+    </div>
     <div class="container">
         <div class="screen"></div>
         <div class="row">
@@ -95,6 +96,6 @@
         </div>
     </div>
     <p class="text">You have selected <span id="count">0</span> seats for a price of ₹<span id="total">0</span></p>
+    <script src="script.js"></script>
 </body>
-
 </html>
