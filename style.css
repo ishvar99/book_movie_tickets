@@ -91,3 +91,15 @@ body{
 p.text span{
     color: #6feaf6;
 }
+button{
+    background-color: #444451;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+}
+button:hover{
+    cursor: pointer;
+}

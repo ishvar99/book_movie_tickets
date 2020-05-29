@@ -7,20 +7,26 @@ let ticketPrice=+movieSelect.value; // '+' converts string to number;
 
 const count= document.getElementById('count');
 const total =document.getElementById('total');
+const lock =document.getElementById('btn');
 
 populateUI();
 function populateUI(){
     const selectedSeats= JSON.parse(localStorage.getItem('selectedSeats'));
-    console.log(selectedSeats);
+    const occupiedSeats= JSON.parse(localStorage.getItem('occupiedSeats'));
+    if(occupiedSeats!=null && occupiedSeats.length>0){
+        [...seats].map((seat,i)=>{
+            if(occupiedSeats.includes(i)){
+                seat.classList.add('occupied');
+            }
+        })
+    }
     if(selectedSeats!=null && selectedSeats.length>0){
-        console.log(seats);
     [...seats].map((seat,i)=>{
         if(selectedSeats.includes(i)){
             seat.classList.add('selected');
         }
     })
 }
-
     const movieIndex=JSON.parse(localStorage.getItem('movieIndex'));
     const moviePrice=JSON.parse(localStorage.getItem('moviePrice'));
     if(movieIndex!=null && moviePrice!=null){
@@ -29,6 +35,21 @@ function populateUI(){
     total.innerText=selectedSeats.length*moviePrice;
     }
 
+}
+
+function lockSeats(){
+    const bookedSeats=container.querySelectorAll('.row .seat.selected');
+  const occupiedSeats= [...bookedSeats].map((seat,i)=>{
+        seat.classList.remove('selected');
+        seat.classList.add('occupied');
+        return seat;
+    });
+    const occupiedIndices=occupiedSeats.map((seat)=>{
+        return [...seats].indexOf(seat);
+    })
+    localStorage.setItem('occupiedSeats',JSON.stringify(occupiedIndices));
+    count.innerText=0;
+    total.innerText=0;
 }
 
 function updateSelectedCount(){
@@ -57,4 +78,7 @@ container.addEventListener('click',(e)=>{
     }
 })
 
+lock.addEventListener('click',(e)=>{
+    lockSeats();
+})
 
