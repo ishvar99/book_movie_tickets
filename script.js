@@ -7,7 +7,7 @@ let ticketPrice=+movieSelect.value; // '+' converts string to number;
 const count= document.getElementById('count');
 const total =document.getElementById('total');
 const lock =document.getElementById('btn');
-let occupiedSeats=[];
+let occupiedSeats;
 populateUI();
 function populateUI(){
     const selectedSeats= JSON.parse(localStorage.getItem('selectedSeats'));
