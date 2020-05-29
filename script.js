@@ -2,17 +2,16 @@ const container=document.querySelector('.container');
 const seats=document.querySelectorAll('.row .seat:not(.occupied)')
 
 const movieSelect=document.getElementById('movie');
-
 let ticketPrice=+movieSelect.value; // '+' converts string to number;
 
 const count= document.getElementById('count');
 const total =document.getElementById('total');
 const lock =document.getElementById('btn');
-
+let occupiedSeats=[];
 populateUI();
 function populateUI(){
     const selectedSeats= JSON.parse(localStorage.getItem('selectedSeats'));
-    const occupiedSeats= JSON.parse(localStorage.getItem('occupiedSeats'));
+    occupiedSeats= JSON.parse(localStorage.getItem('occupiedSeats'));
     if(occupiedSeats!=null && occupiedSeats.length>0){
         [...seats].map((seat,i)=>{
             if(occupiedSeats.includes(i)){
@@ -26,7 +25,6 @@ function populateUI(){
             seat.classList.add('selected');
         }
     })
-}
     const movieIndex=JSON.parse(localStorage.getItem('movieIndex'));
     const moviePrice=JSON.parse(localStorage.getItem('moviePrice'));
     if(movieIndex!=null && moviePrice!=null){
@@ -34,16 +32,27 @@ function populateUI(){
     count.innerText=selectedSeats.length;
     total.innerText=selectedSeats.length*moviePrice;
     }
-
+    }
 }
 
 function lockSeats(){
     const bookedSeats=container.querySelectorAll('.row .seat.selected');
-  const occupiedSeats= [...bookedSeats].map((seat,i)=>{
+      if(bookedSeats!=null &&bookedSeats.length>0){
+          if(occupiedSeats!=null&&occupiedSeats.length>0){
+  occupiedSeats= [...occupiedSeats,...[...bookedSeats].map((seat,i)=>{
+        seat.classList.remove('selected');
+        seat.classList.add('occupied');
+        return seat;
+    })];
+}
+else{
+    occupiedSeats= [...bookedSeats].map((seat,i)=>{
         seat.classList.remove('selected');
         seat.classList.add('occupied');
         return seat;
     });
+}
+    console.log(occupiedSeats);
     const occupiedIndices=occupiedSeats.map((seat)=>{
         return [...seats].indexOf(seat);
     })
@@ -51,7 +60,7 @@ function lockSeats(){
     count.innerText=0;
     total.innerText=0;
 }
-
+}
 function setMovieData(movieIndex,moviePrice){
     localStorage.setItem('movieIndex',movieIndex);
     localStorage.setItem('moviePrice',moviePrice);
