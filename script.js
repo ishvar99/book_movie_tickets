@@ -12,6 +12,10 @@ function updateSelectedCount(){
     const bookedSeats=container.querySelectorAll('.row .seat.selected');
     count.innerText=bookedSeats.length;
     total.innerText=bookedSeats.length*ticketPrice;
+    const seatsIndex=[...bookedSeats].map((seat)=>{
+        return [...seats].indexOf(seat);
+    })
+    localStorage.setItem('selectedSeats',JSON.stringify(seatsIndex));
 }
 
 
