@@ -21,6 +21,14 @@ function populateUI(){
     })
 }
 
+    const movieIndex=JSON.parse(localStorage.getItem('movieIndex'));
+    const moviePrice=JSON.parse(localStorage.getItem('moviePrice'));
+    if(movieIndex!=null && moviePrice!=null){
+    movieSelect.selectedIndex=movieIndex;
+    count.innerText=selectedSeats.length;
+    total.innerText=selectedSeats.length*moviePrice;
+    }
+
 }
 
 function updateSelectedCount(){
